@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: WordPress Export Menus
+ * Plugin Name: Export WordPress Menus
  * Plugin URI: 
  * Description: Export your WordPress menus.
  * Version: 1.0
