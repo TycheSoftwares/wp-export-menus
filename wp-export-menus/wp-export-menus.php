@@ -3,9 +3,12 @@
  * Plugin Name: Export WordPress Menus
  * Plugin URI: 
  * Description: Export your WordPress menus.
- * Version: 1.0
+ * Version: 1.1
  * Author: Tyche Softwares
  * Author URI: http://tychesoftwares.com/
+ * Text Domain: wp-export-menus
+ * Domain Path: /i18n/languages/
+ * Requires PHP: 5.6
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -14,11 +17,48 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'WP_Export_Menus' ) ) {
 	class WP_Export_Menus {
+
+		const WEM_VERSION = '1.1';
 	    
 		public function __construct() {
+			$this->wem_constants();
 			add_action( 'export_filters', array( &$this, 'export_filters' ) );	
 			add_filter( 'export_args', array( &$this, 'export_args' ) );
 			add_action( 'admin_head', array( &$this, 'wem_export_add_js' ) );
+			// Language Translation
+			add_action ( 'init',      array( &$this, 'wem_update_po_file' ) );
+			
+			$is_admin = is_admin();
+
+			if ( true === $is_admin ) {
+				require_once( plugin_dir_path(__FILE__) . 'includes/wp-export-menus-all-component.php' );
+	
+				add_filter( 'ts_deativate_plugin_questions', array( $this, 'wem_deactivate_add_questions' ), 10, 1 );
+				add_filter( 'ts_tracker_data',               array( $this, 'wem_ts_add_plugin_tracking_data' ), 10, 1 );
+				add_filter( 'ts_tracker_opt_out_data',       array( $this, 'wem_get_data_for_opt_out' ), 10, 1 );
+				add_action( 'admin_init',                    array( $this, 'wem_admin_actions' ) );
+			}
+		}
+
+		function wem_constants () {
+			if ( !defined( 'WEM_VERSION' ) ) {
+					define ( 'WEM_VERSION', '1.1' );
+			}
+		}
+		/**
+         * This function will allowed customer to transalte the plugin string using .po and .pot file.
+         * @hook init
+         * @since 1.1
+         */
+        function  wem_update_po_file() {
+            
+            $domain = 'wp-export-menus';
+			$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
+            if ( $loaded = load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '-' . $locale . '.mo' ) ) {
+                return $loaded;
+            } else {
+                load_plugin_textdomain( $domain, FALSE, basename( dirname( __FILE__ ) ) . '/i18n/languages/' );
+            }
 		}
 		
 		/**
@@ -48,19 +88,19 @@ if ( ! class_exists( 'WP_Export_Menus' ) ) {
 		
 		public function export_filters() {
 			?>
-			<p><label><input type="radio" name="content" value="nav_menu_item" /> <?php _e( 'Navigation Menu Items' ); ?></label></p>
+			<p><label><input type="radio" name="content" value="nav_menu_item" /> <?php _e( 'Navigation Menu Items', 'wp-export-menus' ); ?></label></p>
 			<ul id="nav-menu-item-filters" class="nav-menu-item-filters">
 				<li>
 					<fieldset>
-					<legend class="screen-reader-text"><?php _e( 'Date range:' ); ?></legend>
-					<label for="nav-menu-item-start-date" class="label-responsive"><?php _e( 'Start date:' ); ?></label>
+					<legend class="screen-reader-text"><?php _e( 'Date range:', 'wp-export-menus' ); ?></legend>
+					<label for="nav-menu-item-start-date" class="label-responsive"><?php _e( 'Start date:', 'wp-export-menus' ); ?></label>
 					<select name="nav_menu_item_start_date" id="nav-menu-item-start-date">
-						<option value="0"><?php _e( '&mdash; Select &mdash;' ); ?></option>
+						<option value="0"><?php _e( '&mdash; Select &mdash;', 'wp-export-menus' ); ?></option>
 						<?php export_date_options( 'nav_menu_item' ); ?>
 					</select>
-					<label for="nav-menu-item-end-date" class="label-responsive"><?php _e( 'End date:' ); ?></label>
+					<label for="nav-menu-item-end-date" class="label-responsive"><?php _e( 'End date:', 'wp-export-menus' ); ?></label>
 					<select name="nav-menu-item_end_date" id="nav-menu-item-end-date">
-						<option value="0"><?php _e( '&mdash; Select &mdash;' ); ?></option>
+						<option value="0"><?php _e( '&mdash; Select &mdash;', 'wp-export-menus' ); ?></option>
 						<?php export_date_options( 'nav_menu_item' ); ?>
 					</select>
 					</fieldset>
@@ -310,7 +350,78 @@ if ( ! class_exists( 'WP_Export_Menus' ) ) {
     		foreach ( (array) $terms as $term ) {
     			echo "\t\t<category domain=\"{$term->taxonomy}\" nicename=\"{$term->slug}\">" . self::wem_cdata( $term->name ) . "</category>\n";
     		}
-    	}
+		}
+		
+		function wem_deactivate_add_questions ( $wem_deactivate_questions ) {
+
+			$wem_deactivate_questions = array(
+				0 => array(
+					'id'                => 4, 
+					'text'              => __( "WordPress Menus are not exported not getting exported.", "wem" ),
+					'input_type'        => '',
+					'input_placeholder' => ''
+					)
+	
+			);
+			return $wem_deactivate_questions;
+		}
+	
+		function wem_admin_actions ( ) {
+			/**
+			 * We need to store the plugin version in DB, so we can show the welcome page and other contents.
+			 */
+			$wem_version_in_db = get_option( 'wem_version' ); 
+			if ( $wem_version_in_db != self::WEM_VERSION ) {
+				update_option( 'wem_version', self::WEM_VERSION );
+			}
+		}
+	
+		/**
+		 * Plugin's data to be tracked when Allow option is choosed.
+		 *
+		 * @hook ts_tracker_data
+		 *
+		 * @param array $data Contains the data to be tracked.
+		 *
+		 * @return array Plugin's data to track.
+		 * 
+		 */
+	
+		public static function wem_ts_add_plugin_tracking_data ( $data ) {
+			if ( isset( $_GET[ 'wem_tracker_optin' ] ) && isset( $_GET[ 'wem_tracker_nonce' ] ) && wp_verify_nonce( $_GET[ 'wem_tracker_nonce' ], 'wem_tracker_optin' ) ) {
+	
+				$plugin_data[ 'ts_meta_data_table_name' ] = 'ts_tracking_wem_meta_data';
+				$plugin_data[ 'ts_plugin_name' ]		  = 'Export WordPress Menus';
+				/**
+				 * Add Plugin data
+				 */
+				$plugin_data[ 'wem_plugin_version' ]      = self::WEM_VERSION;
+				
+				$plugin_data[ 'wem_allow_tracking' ]      = get_option ( 'wem_allow_tracking' );
+				$data[ 'plugin_data' ]                    = $plugin_data;
+			}
+			return $data;
+		}
+		
+		/**
+		 * Tracking data to send when No, thanks. button is clicked.
+		 *
+		 * @hook ts_tracker_opt_out_data
+		 *
+		 * @param array $params Parameters to pass for tracking data.
+		 *
+		 * @return array Data to track when opted out.
+		 * 
+		 */
+		public static function wem_get_data_for_opt_out ( $params ) {
+			$plugin_data[ 'ts_meta_data_table_name']   = 'ts_tracking_wem_meta_data';
+			$plugin_data[ 'ts_plugin_name' ]		   = 'Export WordPress Menus';
+			
+			// Store count info
+			$params[ 'plugin_data' ]  				   = $plugin_data;
+			
+			return $params;
+		}
 	}
 	$WP_Export_Menus = new WP_Export_Menus();
 }
