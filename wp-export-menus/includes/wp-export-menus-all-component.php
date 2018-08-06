@@ -42,7 +42,7 @@ if ( ! class_exists( 'WP_Export_Menus_Component' ) ) {
 
                 $wem_get_previous_version = get_option( 'wem_version', '1' );
 
-                $wem_blog_post_link       = 'https://www.tychesoftwares.com/docs/docs/wp-content-copy-protection/usage-tracking/';
+                $wem_blog_post_link       = 'https://www.tychesoftwares.com/docs/docs/export-wordpress-menus/usage-tracking/';
 
                 $wem_plugins_page         = '';
                 $wem_plugin_slug          = '';
