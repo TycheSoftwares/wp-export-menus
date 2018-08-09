@@ -27,12 +27,11 @@ if ( ! class_exists( 'WP_Export_Menus' ) ) {
 			add_action( 'admin_head', array( &$this, 'wem_export_add_js' ) );
 			// Language Translation
 			add_action ( 'init',      array( &$this, 'wem_update_po_file' ) );
-			
+			add_action ( 'init',      array( &$this, 'wem_add_files' ) );
 			$is_admin = is_admin();
 
 			if ( true === $is_admin ) {
-				require_once( plugin_dir_path(__FILE__) . 'includes/wp-export-menus-all-component.php' );
-	
+				
 				add_filter( 'ts_deativate_plugin_questions', array( $this, 'wem_deactivate_add_questions' ), 10, 1 );
 				add_filter( 'ts_tracker_data',               array( $this, 'wem_ts_add_plugin_tracking_data' ), 10, 1 );
 				add_filter( 'ts_tracker_opt_out_data',       array( $this, 'wem_get_data_for_opt_out' ), 10, 1 );
@@ -40,6 +39,10 @@ if ( ! class_exists( 'WP_Export_Menus' ) ) {
 			}
 		}
 
+		function wem_add_files () {
+			require_once( plugin_dir_path(__FILE__) . 'includes/wp-export-menus-all-component.php' );
+		}
+		
 		function wem_constants () {
 			if ( !defined( 'WEM_VERSION' ) ) {
 					define ( 'WEM_VERSION', '1.1' );
