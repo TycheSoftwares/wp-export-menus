@@ -56,8 +56,12 @@ if ( ! class_exists( 'WP_Export_Menus_Component' ) ) {
                 $wem_deativate = new WEM_TS_deactivate;
                 $wem_deativate->init ( $wem_file_name, $wem_plugin_name );
 
-                new WEM_TS_Welcome ( $wem_plugin_name, $wem_plugin_prefix, $wem_locale, $wem_plugin_folder_name, $wem_plugin_dir_name, $wem_get_previous_version );
-
+                $user = wp_get_current_user();
+                
+                if ( in_array( 'administrator', (array) $user->roles ) ) {
+                
+                    new WEM_TS_Welcome ( $wem_plugin_name, $wem_plugin_prefix, $wem_locale, $wem_plugin_folder_name, $wem_plugin_dir_name, $wem_get_previous_version );
+                }
                 $ts_pro_wem = self::wem_get_faq ();
                 new WEM_TS_Faq_Support( $wem_plugin_name, $wem_plugin_prefix, $wem_plugins_page, $wem_locale, $wem_plugin_folder_name, $wem_plugin_slug, $ts_pro_wem, '', $wem_file_name );
                 
