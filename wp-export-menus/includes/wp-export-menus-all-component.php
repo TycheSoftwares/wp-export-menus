@@ -62,11 +62,14 @@ if ( ! class_exists( 'WP_Export_Menus_Component' ) ) {
                 
                     new WEM_TS_Welcome ( $wem_plugin_name, $wem_plugin_prefix, $wem_locale, $wem_plugin_folder_name, $wem_plugin_dir_name, $wem_get_previous_version );
                 }
+                
                 $ts_pro_wem = self::wem_get_faq ();
                 new WEM_TS_Faq_Support( $wem_plugin_name, $wem_plugin_prefix, $wem_plugins_page, $wem_locale, $wem_plugin_folder_name, $wem_plugin_slug, $ts_pro_wem, '', $wem_file_name );
                 
-                $ts_pro_notices = self::wem_get_notice_text ();
-				new WEM_ts_pro_notices( $wem_plugin_name, $wem_lite_plugin_prefix, $wem_plugin_prefix, $ts_pro_notices, $wem_file_name, $wem_pro_file_name );
+                if ( in_array('woocommerce/woocommerce.php', get_option('active_plugins')) ) {
+                    $ts_pro_notices = self::wem_get_notice_text ();
+                    new WEM_ts_pro_notices( $wem_plugin_name, $wem_lite_plugin_prefix, $wem_plugin_prefix, $ts_pro_notices, $wem_file_name, $wem_pro_file_name );
+                }
 
             }
         }
