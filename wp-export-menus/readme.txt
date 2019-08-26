@@ -4,8 +4,8 @@ Donate link: https://www.paypal.me/TycheSoftwares
 Author URI: https://www.tychesoftwares.com/
 Tags: export, menus, exporter, wordpress menus, wordpress
 Requires at least: 1.4
-Tested up to: 4.9.4
-Stable tag: trunk
+Tested up to: 5.2.2
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -100,6 +100,9 @@ Option 3:
 
 == Changelog ==
 
+= 1.2 (26.08.2019) = 
+* Changes in code to make the plugin compliant as per WPCS rules.
+
 = 1.1 (21.03.2018) =
 * We have included .po, .pot and .mo files in the plugin. The plugin strings can now be translated to any language using these files. Now, our plugin is prepared for localization via translate.wordpress.org.
 
@@ -113,3 +116,6 @@ Option 3:
 
 = 1.1 (21.03.2018) =
 * We have included .po, .pot and .mo files in the plugin. The plugin strings can now be translated to any language using these files. Now, our plugin is prepared for localization via translate.wordpress.org.
+
+= 1.2 (26.08.2019) =
+* Changes in code to make the plugin compliant as per WPCS rules.

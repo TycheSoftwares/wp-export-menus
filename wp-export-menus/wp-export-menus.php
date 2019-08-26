@@ -1,9 +1,8 @@
 <?php
 /**
  * Plugin Name: Export WordPress Menus
- * Plugin URI:
  * Description: Export your WordPress menus.
- * Version: 1.1
+ * Version: 1.2
  * Author: Tyche Softwares
  * Author URI: http://tychesoftwares.com/
  * Text Domain: wp-export-menus
@@ -26,7 +25,7 @@ if ( ! class_exists( 'WP_Export_Menus' ) ) {
 	 */
 	class WP_Export_Menus {
 
-		const WEM_VERSION = '1.1';
+		const WEM_VERSION = '1.2';
 
 		/**
 		 * Default Constructor
@@ -62,7 +61,7 @@ if ( ! class_exists( 'WP_Export_Menus' ) ) {
 		 */
 		public function wem_constants() {
 			if ( ! defined( 'WEM_VERSION' ) ) {
-					define( 'WEM_VERSION', '1.1' );
+					define( 'WEM_VERSION', '1.2' );
 			}
 		}
 
