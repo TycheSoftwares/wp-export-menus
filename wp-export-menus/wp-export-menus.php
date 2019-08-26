@@ -38,7 +38,6 @@ if ( ! class_exists( 'WP_Export_Menus' ) ) {
 
 			// Language Translation.
 			add_action( 'init', array( &$this, 'wem_update_po_file' ) );
-			add_action( 'init', array( &$this, 'wem_add_files' ) );
 
 			$is_admin = is_admin();
 			if ( true === $is_admin ) {
@@ -47,13 +46,6 @@ if ( ! class_exists( 'WP_Export_Menus' ) ) {
 				add_filter( 'ts_tracker_opt_out_data', array( $this, 'wem_get_data_for_opt_out' ), 10, 1 );
 				add_action( 'admin_init', array( $this, 'wem_admin_actions' ) );
 			}
-		}
-
-		/**
-		 * Include require files
-		 */
-		public function wem_add_files() {
-			require_once plugin_dir_path( __FILE__ ) . 'includes/wp-export-menus-all-component.php';
 		}
 
 		/**
