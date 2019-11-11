@@ -6,6 +6,7 @@ Tags: export, menus, exporter, wordpress menus, wordpress
 Requires at least: 1.4
 Tested up to: 5.2.2
 Stable tag: 1.2
+Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -42,6 +43,20 @@ If you like Export WordPress Menus, please leave a [5 star] review on WordPress.
 4. **[Product Delivery Date Pro for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/product-delivery-date-pro-for-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=WPExportMenus "Product Delivery Date Pro for WooCommerce")**
 
 5. **[Deposits For WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/deposits-for-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=WPExportMenus "Deposits For WooCommerce")**
+
+6. **[Payment Gateway Based Fees and Discounts for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/payment-gateway-based-fees-and-discounts-for-woocommerce-plugin/?utm_source=wprepo&utm_medium=link&utm_campaign=WPExportMenus "Payment Gateway Based Fees and Discounts for WooCommerce")**
+
+7. **[Custom Order Status for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/custom-order-status-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=WPExportMenus "Custom Order Status for WooCommerce")**
+
+8. **[Custom Order Numbers for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/custom-order-numbers-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=WPExportMenus "Custom Order Numbers for WooCommerce")**
+
+9. **[Product Input Fields for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/product-input-fields-for-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=WPExportMenus "Product Input Fields for WooCommerce")**
+
+10. **[Call for Price for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/woocommerce-call-for-price-plugin/?utm_source=wprepo&utm_medium=link&utm_campaign=WPExportMenus "Call for Price for WooCommerce")**
+
+11. **[Price based on User Role for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/price-user-role-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=WPExportMenus "Price based on User Role for WooCommerce")**
+
+12. **[Currency per Product for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/currency-per-product-for-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=WPExportMenus "Currency per Product for WooCommerce")**
 
 ### Some of our other free plugins
 
