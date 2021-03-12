@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/TycheSoftwares
 Author URI: https://www.tychesoftwares.com/
 Tags: export, menus, exporter, wordpress menus, wordpress
 Requires at least: 1.4
-Tested up to: 5.2.2
+Tested up to: 5.7
 Stable tag: 1.2
 Requires PHP: 5.6
 License: GPLv2 or later
